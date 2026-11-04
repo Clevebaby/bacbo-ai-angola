@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BacBo AI Angola</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #080d19;
+    color: white;
+}
+
+header {
+    background: #111a2d;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #26334d;
+}
+
+header h1 {
+    color: #00e0ff;
+    margin: 0;
+}
+
+header p {
+    color: #aab8d0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.card {
+    background: #111a2d;
+    border: 1px solid #26334d;
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #00e0ff;
+    text-align: center;
+}
+
+.upload {
+    display: block;
+    width: 100%;
+    padding: 18px;
+    background: #182640;
+    border: 2px dashed #00e0ff;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+#preview {
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 10px;
+    display: none;
+}
+
+button {
+    width: 100%;
+    padding: 16px;
+    margin-top: 20px;
+    background: #00e0ff;
+    border: none;
+    border-radius: 10px;
+    color: #08101d;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:disabled {
+    background: #536174;
+    cursor: not-allowed;
+}
+
+#resultado {
+    margin-top: 20px;
+    padding: 15px;
+    background: #080d19;
+    border-radius: 10px;
+    color: #b8c7df;
+    line-height: 1.6;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #75839b;
+    font-size: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1> BACBO AI ANGOLA </h1>
+    <p>Análise visual inteligente de screenshots</p>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>Enviar Screenshot</h2>
+
+        <p>
+            Escolhe uma imagem do gráfico do Bac Bo
+            para preparar a análise.
+        </p>
+
+        <label class="upload" for="imagem">
+            📸 Escolher Screenshot
+        </label>
+
+        <input type="file" id="imagem" accept="image/*">
+
+        <img id="preview" alt="Screenshot selecionado">
+
+        <button id="analisar" disabled>
+            ANALISAR IMAGEM
+        </button>
+
+        <div id="resultado">
+            Aguardando o envio de uma imagem...
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Como Funciona</h2>
+
+        <p>1. Escolhe um screenshot do gráfico.</p>
+        <p>2. Visualiza a imagem selecionada.</p>
+        <p>3. Prepara a imagem para análise.</p>
+        <p>4. Recebe uma interpretação dos dados visíveis.</p>
+    </div>
+
+</div>
+
+<footer>
+    BacBo AI Angola © 2026<br>
+    Ferramenta experimental de análise visual.
+    Não garante resultados futuros.
+</footer>
+
+<script>
+const input = document.getElementById("imagem");
+const preview = document.getElementById("preview");
+const analisar = document.getElementById("analisar");
+const resultado = document.getElementById("resultado");
+
+input.addEventListener("change", function() {
+
+    const ficheiro = this.files[0];
+
+    if (!ficheiro) return;
+
+    if (!ficheiro.type.startsWith("image/")) {
+        resultado.textContent = "Seleciona uma imagem válida.";
+        return;
+    }
+
+    const leitor = new FileReader();
+
+    leitor.onload = function(e) {
+        preview.src = e.target.result;
+        preview.style.display = "block";
+
+        analisar.disabled = false;
+
+        resultado.textContent =
+            "Imagem carregada. Pronta para análise.";
+    };
+
+    leitor.readAsDataURL(ficheiro);
+});
+
+analisar.addEventListener("click", function() {
+
+    resultado.innerHTML =
+        "Screenshot recebido pela interface.<br><br>" +
+        "A integração com o sistema de análise visual " +
+        "será configurada na próxima etapa.";
+
+});
+</script>
+
+</body>
+  </html>
